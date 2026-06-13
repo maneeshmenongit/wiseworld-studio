@@ -13,5 +13,8 @@ dist/
 # Private prep materials — kept out of the repo on purpose
 docs_to_claude/
 
+# Local-only design explorations (not deployed)
+design-explorations/
+
 # Local-only Claude config
 .claude/
