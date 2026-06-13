@@ -1,0 +1,17 @@
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*~
+
+# Build / temp
+node_modules/
+dist/
+.cache/
+
+# Private prep materials — kept out of the repo on purpose
+docs_to_claude/
+
+# Local-only Claude config
+.claude/
