@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wise World AI Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -443,6 +443,223 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px}
 }
 .sc-foot a:hover{background:rgba(0,212,200,0.13);border-color:var(--border3)}
 
+/* ════════════════════════════════════════════════════════════
+   THESIS — homepage tile + reading view
+   Intentionally breaks the dashboard vocabulary. The reading view
+   uses a serif body type, lighter background, and a single 640px
+   column so the writing has space to breathe.
+   ════════════════════════════════════════════════════════════ */
+
+/* Homepage tile that links into the thesis view */
+#thesis-tile{padding:96px 0 64px}
+.thesis-tile-inner{
+  max-width:1120px;margin:0 auto;padding:0 32px;
+}
+.thesis-tile-card{
+  display:grid;grid-template-columns:180px 1fr 160px;gap:48px;align-items:start;
+  padding:40px 44px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(7,13,26,0.55),rgba(7,13,26,0.30));
+  border:1px solid var(--glass-border);
+  text-decoration:none;color:inherit;
+  transition:border-color .3s ease,transform .3s ease,box-shadow .3s ease;
+}
+.thesis-tile-card:hover{
+  border-color:var(--glass-border-hover);
+  transform:translateY(-2px);
+  box-shadow:var(--glass-shadow-hover);
+}
+.thesis-tile-eyebrow{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:8px;
+}
+.thesis-tile-eyebrow::before{
+  content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 8px rgba(240,168,50,0.6);
+}
+.thesis-tile-meta{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--text2);margin-top:14px;line-height:1.7;
+}
+.thesis-tile-meta span{display:block}
+.thesis-tile-body h3{
+  font-family:var(--font-head);font-size:42px;letter-spacing:0.025em;
+  line-height:1.05;color:var(--text);margin:0 0 14px;
+}
+.thesis-tile-body .thesis-tile-sub{
+  font-family:'Lora',serif;font-style:italic;font-size:18px;
+  color:var(--text);opacity:0.85;line-height:1.5;margin:0 0 22px;
+}
+.thesis-tile-body .thesis-tile-excerpt{
+  font-family:'Lora',serif;font-size:15.5px;line-height:1.7;
+  color:var(--text2);max-width:560px;margin:0 0 22px;
+}
+.thesis-tile-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--cyan);
+}
+.thesis-tile-card:hover .thesis-tile-cta .arr{transform:translateX(4px)}
+.thesis-tile-cta .arr{transition:transform .3s ease}
+.thesis-tile-author{
+  text-align:right;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--text3);line-height:1.8;
+}
+.thesis-tile-author strong{
+  display:block;font-family:var(--font-body);font-weight:500;
+  text-transform:none;letter-spacing:0;font-size:13px;color:var(--text);
+  margin-bottom:2px;
+}
+
+/* Reading view */
+.thesis-view{
+  background:#0c1421;
+  min-height:100vh;
+  color:#e2e8f0;
+}
+.thesis-nav{
+  position:sticky;top:0;z-index:30;
+  background:rgba(12,20,33,0.85);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.thesis-nav-inner{
+  max-width:780px;margin:0 auto;padding:18px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.thesis-nav-meta{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:#94a3b8;
+  display:flex;align-items:center;gap:14px;
+}
+.thesis-nav-meta .dot{
+  width:5px;height:5px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 8px rgba(240,168,50,0.6);
+}
+.thesis-back{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.10em;
+  text-transform:uppercase;color:#94a3b8;
+  text-decoration:none;transition:color .2s;
+}
+.thesis-back:hover{color:#e2e8f0}
+
+.thesis-article{
+  max-width:680px;margin:0 auto;padding:80px 32px 120px;
+}
+.thesis-eyebrow{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.20em;
+  text-transform:uppercase;color:#94a3b8;
+  margin-bottom:28px;display:flex;align-items:center;gap:14px;
+}
+.thesis-eyebrow::before{
+  content:"";display:block;width:24px;height:1px;background:var(--cyan);
+}
+.thesis-title{
+  font-family:'Lora',serif;font-weight:500;
+  font-size:clamp(36px,4.5vw,52px);line-height:1.15;letter-spacing:-0.012em;
+  color:#f1f5f9;margin:0 0 24px;
+}
+.thesis-deck{
+  font-family:'Lora',serif;font-style:italic;
+  font-size:21px;line-height:1.5;color:#cbd5e1;
+  margin:0 0 56px;max-width:600px;
+}
+.thesis-byline{
+  display:flex;gap:16px;align-items:center;
+  padding:0 0 36px;margin-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.thesis-byline-name{
+  font-family:var(--font-body);font-weight:500;font-size:14px;color:#f1f5f9;
+}
+.thesis-byline-sub{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.10em;
+  color:#94a3b8;text-transform:uppercase;
+}
+.thesis-byline-divider{
+  width:4px;height:4px;border-radius:50%;background:#475569;
+}
+
+.thesis-prose{
+  font-family:'Lora',serif;font-weight:400;
+  font-size:18px;line-height:1.75;color:#e2e8f0;
+}
+.thesis-prose p{margin:0 0 28px}
+.thesis-prose p:first-child::first-letter{
+  font-family:'Lora',serif;font-weight:500;
+  font-size:3.2em;line-height:0.95;
+  float:left;padding:6px 12px 0 0;color:var(--cyan);
+}
+.thesis-prose h2{
+  font-family:'Lora',serif;font-weight:500;
+  font-size:26px;line-height:1.25;letter-spacing:-0.005em;
+  color:#f1f5f9;margin:56px 0 24px;
+}
+.thesis-prose h2::before{
+  content:"";display:block;width:32px;height:2px;background:var(--cyan);
+  margin-bottom:18px;
+}
+.thesis-prose strong{
+  color:#f1f5f9;font-weight:600;
+}
+.thesis-prose em{
+  color:#cbd5e1;
+}
+.thesis-prose .lead{
+  font-family:'Lora',serif;font-style:italic;font-size:19px;line-height:1.6;
+  color:#cbd5e1;margin:36px 0;
+  padding:0 0 0 24px;border-left:2px solid var(--cyan);
+}
+.thesis-prose .pullquote{
+  margin:48px -28px;padding:32px 36px;
+  font-family:'Lora',serif;font-weight:500;font-style:italic;
+  font-size:22px;line-height:1.45;color:#f1f5f9;
+  border-top:1px solid rgba(34,180,168,0.30);
+  border-bottom:1px solid rgba(34,180,168,0.30);
+  background:linear-gradient(180deg,rgba(0,212,200,0.04),transparent);
+}
+
+.thesis-foot{
+  margin-top:72px;padding-top:40px;
+  border-top:1px solid rgba(255,255,255,0.10);
+}
+.thesis-foot-note{
+  font-family:'Lora',serif;font-style:italic;font-size:16px;line-height:1.6;
+  color:#94a3b8;margin:0 0 32px;
+}
+.thesis-foot-cta{
+  font-family:'Lora',serif;font-size:17px;line-height:1.65;color:#e2e8f0;
+  margin:0 0 24px;
+}
+.thesis-foot-cta a{
+  color:var(--cyan);text-decoration:none;
+  border-bottom:1px solid rgba(34,180,168,0.40);
+  transition:border-color .2s;
+}
+.thesis-foot-cta a:hover{border-bottom-color:var(--cyan)}
+.thesis-foot-meta{
+  display:flex;justify-content:space-between;gap:24px;
+  margin-top:48px;padding-top:24px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
+  text-transform:uppercase;color:#64748b;
+}
+.thesis-foot-meta a{color:#94a3b8;text-decoration:none;transition:color .2s}
+.thesis-foot-meta a:hover{color:#e2e8f0}
+
+/* Small screens — bring the column in, lose the drop-cap */
+@media (max-width: 680px){
+  .thesis-article{padding:48px 24px 80px}
+  .thesis-prose{font-size:17px}
+  .thesis-prose p:first-child::first-letter{font-size:1em;float:none;padding:0;color:inherit}
+  .thesis-prose .pullquote{margin:36px 0;padding:24px 20px;font-size:19px}
+  .thesis-tile-card{
+    grid-template-columns:1fr;gap:24px;padding:32px 24px;
+  }
+  .thesis-tile-author{text-align:left}
+}
+
 </style>
 </head>
 <body>
@@ -557,6 +774,32 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px}
   </div>
 </section>
 
+<!-- THESIS — single tile linking into the long-form reading view -->
+<section id="thesis-tile">
+  <div class="thesis-tile-inner">
+    <a class="thesis-tile-card" href="#thesis/architecture-of-a-mind" data-route="thesis">
+      <div>
+        <div class="thesis-tile-eyebrow">Thesis · In progress</div>
+        <div class="thesis-tile-meta">
+          <span>Essay</span>
+          <span>2026</span>
+          <span>~7 min read</span>
+        </div>
+      </div>
+      <div class="thesis-tile-body">
+        <h3>The Architecture of a Mind</h3>
+        <p class="thesis-tile-sub">Why autonomous agents keep reinventing cognitive science.</p>
+        <p class="thesis-tile-excerpt">Most of the autonomous agents being built today are, underneath, the same thing: a large language model wrapped in a loop, handed some tools, and pointed at a task. They work impressively for a few turns and then drift. I have come to think the failure is architectural, not a matter of model scale &mdash; we are missing the structure that turns a response generator into something that can hold a goal over time.</p>
+        <span class="thesis-tile-cta">Read the thesis <span class="arr">›</span></span>
+      </div>
+      <div class="thesis-tile-author">
+        <strong>Maneesh Menon</strong>
+        Author
+      </div>
+    </a>
+  </div>
+</section>
+
 <!-- PRODUCTS — entry-point cards (rendered from JS PRODUCTS data) -->
 <section id="products">
   <div class="sw">
@@ -607,7 +850,8 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px}
       <p>Building the AI-native product stack. Open to collaboration, consulting, and senior engineering roles.</p>
     </div>
     <div class="foot-links"><h4>Products</h4><ul id="footer-products"><!-- injected --></ul></div>
-    <div class="foot-links"><h4>Connect</h4><ul><li><a href="https://github.com/maneeshmenongit" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://www.linkedin.com/in/maneeshmenon/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:hello@wiseworldai.com">hello@wiseworldai.com</a></li></ul></div>
+    <div class="foot-links"><h4>Writing</h4><ul><li><a href="#thesis/architecture-of-a-mind">Architecture of a Mind</a></li></ul></div>
+    <div class="foot-links"><h4>Connect</h4><ul><li><a href="https://github.com/maneeshmenongit" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://www.linkedin.com/in/maneeshmenon/" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="mailto:mmaneeshmenon@gmail.com">mmaneeshmenon@gmail.com</a></li></ul></div>
   </div>
   <div class="foot-bot"><p>2026 Wise World LLC</p><p>Built with intention. Deployed on Railway.</p></div>
 </footer>
@@ -622,6 +866,17 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px}
     <div class="sc-foot-title">Continue exploring</div>
     <a href="#home#products"><span class="arr-l">‹</span> All products</a>
   </div>
+</div>
+
+<!-- ─────────── THESIS VIEW (long-form reading) ─────────── -->
+<div class="view thesis-view" id="view-thesis">
+  <nav class="thesis-nav">
+    <div class="thesis-nav-inner">
+      <div class="thesis-nav-meta"><div class="dot"></div>Thesis · In progress</div>
+      <a class="thesis-back" href="#home">← Back to studio</a>
+    </div>
+  </nav>
+  <article class="thesis-article" id="thesis-content"><!-- injected per essay --></article>
 </div>
 
 <script>
@@ -963,6 +1218,102 @@ function renderShowcase(slug){
   `;
   document.title = `${p.name} — Wise World AI Studio`;
   mountAnimations();
+}
+
+/* ────────────────────────────────────────────────────────────
+   THESIS — essay registry + reading-view renderer
+   New essays drop in as additional entries in THESIS_ESSAYS.
+   Body is HTML so we can mark up pull-quotes and structural cues
+   without a markdown runtime.
+   ─────────────────────────────────────────────────────────── */
+const THESIS_ESSAYS = {
+  "architecture-of-a-mind": {
+    title: "The Architecture of a Mind",
+    deck: "Why autonomous agents keep reinventing cognitive science.",
+    eyebrow: "Essay · In progress",
+    date: "2026 · ongoing",
+    readTime: "~7 min",
+    author: "Maneesh Menon",
+    body: `
+      <p>Most of the autonomous agents being built today are, underneath, the same thing: a large language model wrapped in a loop, handed some tools, and pointed at a task. They work impressively for a few turns and then drift &mdash; losing the thread of what they were doing, contradicting their own past decisions, agreeing with whatever was said most recently, or confidently solving a problem nobody asked about. If you have built with these systems, you have felt this. The demo is magic. The week-long project is a different story.</p>
+
+      <p>I have spent the last stretch of time researching <em>why</em> this happens, and I have come to think the failure is architectural, not a matter of model scale. We are missing the structure that turns a response generator into something that can hold a goal over time. That structure has a name, and a forty-year history most of the field has not read.</p>
+
+      <h2>The substrate problem, inverted</h2>
+
+      <p>In the 1980s and 90s, cognitive scientists tried to build the architecture of a mind. Soar, ACT-R, CLARION &mdash; these were serious attempts to specify, at the structural level, what a thinking system is made of: working memory, long-term memory split into facts and skills, a control loop that decides what to attend to, a fast intuitive mode and a slow deliberate one. They got remarkably far on the <em>shape</em> of cognition.</p>
+
+      <p>And then they hit a wall. Every piece of knowledge had to be hand-engineered. These architectures could reason beautifully over a domain you painstakingly encoded for them, but they could not acquire knowledge from the world on their own. No architecture, however well-designed, can think without something to think about. The substrate was missing, and the field stalled.</p>
+
+      <p class="pullquote">We solved the problem that broke cognitive architectures and then declined to use what those architectures figured out.</p>
+
+      <p>Large language models are exactly the substrate those architectures lacked. They arrive pre-loaded with a vast, messy, useful model of the world. But here is the inversion worth sitting with: we now have the substrate and we have thrown away the architecture. The dominant pattern &mdash; model plus loop plus tools &mdash; is a powerful engine bolted to almost no chassis.</p>
+
+      <p>The interesting work, I think, is in putting the two back together. Not as nostalgia for symbolic AI, but as a recognition that the structural insights &mdash; typed memory, hierarchical control, dual-process reasoning &mdash; were correct, and are now finally buildable because the substrate exists.</p>
+
+      <h2>What the structure actually buys you</h2>
+
+      <p>It is worth being concrete about which failures the missing structure would prevent, because the mapping is tight.</p>
+
+      <p><strong>Memory that is one undifferentiated blob.</strong> Most agents flatten everything &mdash; facts, past events, learned procedures &mdash; into a single vector store and retrieve by similarity. But these are different kinds of memory with different access patterns. A fact you look up. A skill you execute. An experience you reflect on. Retrieval is not one algorithm; it is a family of them, and collapsing the distinction is why agents retrieve a fragment of context and act on it with full confidence. The most dangerous retrieval failure is not hallucination &mdash; it is acting coherently on a partial recall, certain of a conclusion whose premise you never actually fetched.</p>
+
+      <p><strong>No sense of what matters right now.</strong> Skilled humans manage their own zoom level. Given a sprawling problem, a good engineer forms a hypothesis about the underlying pattern, descends to test it, and explicitly defers the noise. Given a narrow problem with missing context, they go <em>get</em> the context rather than inventing it. Current agents fail in both directions at once: handed breadth, they enumerate every difference without finding the pattern; handed a fragment, they confabulate the surrounding world and solve the problem they imagined. The capability that is missing is not raw reasoning. It is the active management of scope &mdash; knowing when to zoom out to form a hypothesis and when to zoom in to test it.</p>
+
+      <p><strong>One speed for every decision.</strong> Humans run a fast intuitive mode for the routine and a slow deliberate one for the consequential, and &mdash; crucially &mdash; we can tell which a situation calls for. Most agent systems run one mode for everything, which means they are either confidently wrong on the decisions that matter or unusably slow on the ones that don&rsquo;t. And the usual fix, &ldquo;add more reasoning steps,&rdquo; does not actually help, because the extra reasoning shares the same blind spots as the thing it is checking. Real deliberation has to be grounded in something outside the model &mdash; a deterministic tool, a verifiable fact, an external referee &mdash; not just another pass of the same machinery agreeing with itself.</p>
+
+      <p><strong>Agreement as decay.</strong> This is the subtle one. Models tuned to be helpful drift toward agreement over long interactions. An agent that absorbs every suggestion as a course correction does not have goals; it has a moving average of whatever it was last told. Over a long project, this is fatal and nearly invisible &mdash; you do not notice the drift until the system has quietly stopped being useful, and by then you cannot point to where it happened. Holding a direction over time, while staying genuinely open to legitimate correction, turns out to be one of the hardest properties to engineer. The two requirements &mdash; be adaptive, hold your goals &mdash; are in direct tension, and most systems resolve it by quietly abandoning the second.</p>
+
+      <h2>The bet</h2>
+
+      <p>The thesis I am working from is that an agent capable of driving real, multi-week work is not a bigger model. It is a model placed inside the right cognitive structure: typed memory with retrieval tuned per type, a control loop that plans across horizons and recovers from dead ends rather than stalling on them, a deliberate mode grounded in checks outside the model, and a hard architectural line protecting the system&rsquo;s goals from being eroded by everything it reads.</p>
+
+      <p>Two further constraints make this harder and, I think, more interesting. The first is <strong>long-horizon coherence</strong> &mdash; staying on track across months, not the hours or days that current evaluations cover. Almost nothing in the literature speaks to this regime, which is precisely where an autonomous collaborator has to live. The second is <strong>operating locally</strong> &mdash; treating the local model as the default and cloud escalation as a deliberate exception. This is partly about privacy and cost, but mostly it is a forcing function: a weaker engine inside a strong architecture is a far better test of the architecture than a frontier model that hides the scaffolding&rsquo;s gaps behind raw capability. If it works locally, the structure is doing real work.</p>
+
+      <p>None of these are solved. Long-horizon coherence in particular I would call genuinely open &mdash; the mechanisms are specifiable, but the proof only comes from running a system for months and watching where it breaks. That is the phase I am moving toward now: turning the architecture into something that runs, pointed at a real project, and reporting honestly on what holds and what doesn&rsquo;t.</p>
+
+      <h2>Why I&rsquo;m writing this</h2>
+
+      <p>I am building this largely solo, and the research has reached the point where the thinking is sharper in contact with other people who care about the same problems.</p>
+    `,
+    footNote: "More to come as the system moves from specification to something that runs.",
+    cta: `If you work on agent memory, long-horizon coherence, cognitive architectures, or local-first agent systems &mdash; whether you think the bet above is right or obviously wrong &mdash; <a href="mailto:mmaneeshmenon@gmail.com?subject=Architecture%20of%20a%20Mind">I would like to hear from you</a>. The strongest version of this work will come from argument, not from agreement.`
+  }
+};
+
+function renderThesis(slug){
+  const essay = THESIS_ESSAYS[slug];
+  const container = document.getElementById("thesis-content");
+  if(!essay){
+    container.innerHTML = `
+      <p class="thesis-eyebrow">Not found</p>
+      <h1 class="thesis-title">No essay at this address.</h1>
+      <p class="thesis-deck">Back to <a href="#home" style="color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(34,180,168,0.40)">the studio</a>.</p>
+    `;
+    document.title = "Wise World — Not found";
+    return;
+  }
+  container.innerHTML = `
+    <div class="thesis-eyebrow">${essay.eyebrow}</div>
+    <h1 class="thesis-title">${essay.title}</h1>
+    <p class="thesis-deck">${essay.deck}</p>
+    <div class="thesis-byline">
+      <span class="thesis-byline-name">${essay.author}</span>
+      <span class="thesis-byline-divider"></span>
+      <span class="thesis-byline-sub">${essay.date}</span>
+      <span class="thesis-byline-divider"></span>
+      <span class="thesis-byline-sub">${essay.readTime}</span>
+    </div>
+    <div class="thesis-prose">${essay.body}</div>
+    <div class="thesis-foot">
+      <p class="thesis-foot-note">${essay.footNote}</p>
+      <p class="thesis-foot-cta">${essay.cta}</p>
+      <div class="thesis-foot-meta">
+        <a href="#home">← Back to studio</a>
+        <span>Wise World AI Studio · 2026</span>
+      </div>
+    </div>
+  `;
+  document.title = `${essay.title} — Wise World AI Studio`;
 }
 
 /* ────────────────────────────────────────────────────────────
@@ -5247,14 +5598,19 @@ ANIMS["pulsewise-circuit-breaker"] = {
      #home                → home view (default)
      #home#sectionId      → home view, scroll to section
      #products/{slug}     → showcase view for that product
+     #thesis/{slug}       → thesis reading view for that essay
    Anything else → home.
    ─────────────────────────────────────────────────────────── */
 const VIEW_HOME = document.getElementById("view-home");
 const VIEW_SHOWCASE = document.getElementById("view-showcase");
+const VIEW_THESIS = document.getElementById("view-thesis");
 
 function parseRoute(){
   const raw = window.location.hash.replace(/^#/,"");
   if(!raw) return {view:"home", section:null};
+  // thesis/{slug}
+  const t = raw.match(/^thesis\/([a-z0-9-]+)/i);
+  if(t) return {view:"thesis", slug:t[1].toLowerCase()};
   // products/{slug}
   const m = raw.match(/^products\/([a-z0-9-]+)/i);
   if(m) return {view:"showcase", slug:m[1].toLowerCase()};
@@ -5269,13 +5625,20 @@ function parseRoute(){
 
 function applyRoute(){
   const r = parseRoute();
+  // Reset all views, then activate the target one.
+  VIEW_HOME.classList.remove("active");
+  VIEW_SHOWCASE.classList.remove("active");
+  VIEW_THESIS.classList.remove("active");
+
   if(r.view === "showcase"){
-    VIEW_HOME.classList.remove("active");
     VIEW_SHOWCASE.classList.add("active");
     renderShowcase(r.slug);
-    window.scrollTo({top:0, behavior:"instant" in window ? "auto" : "auto"});
+    window.scrollTo({top:0, behavior:"auto"});
+  } else if(r.view === "thesis"){
+    VIEW_THESIS.classList.add("active");
+    renderThesis(r.slug);
+    window.scrollTo({top:0, behavior:"auto"});
   } else {
-    VIEW_SHOWCASE.classList.remove("active");
     VIEW_HOME.classList.add("active");
     document.title = "Wise World AI Studio";
     if(r.section){
