@@ -501,15 +501,61 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px}
 }
 .thesis-tile-card:hover .thesis-tile-cta .arr{transform:translateX(4px)}
 .thesis-tile-cta .arr{transition:transform .3s ease}
+
+/* Author column — stack: share button on top, byline below.
+   Putting the share button inside the right column avoids any
+   overlap with the byline. Click on the icon does NOT navigate
+   (JS handler stops propagation on the parent <a>). */
 .thesis-tile-author{
-  text-align:right;
-  font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
-  text-transform:uppercase;color:var(--text3);line-height:1.8;
+  display:flex;flex-direction:column;align-items:flex-end;gap:18px;
 }
-.thesis-tile-author strong{
+.thesis-tile-author-meta{
+  text-align:right;font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);
+  line-height:1.8;
+}
+.thesis-tile-author-meta strong{
   display:block;font-family:var(--font-body);font-weight:500;
   text-transform:none;letter-spacing:0;font-size:13px;color:var(--text);
   margin-bottom:2px;
+}
+.thesis-tile-share{
+  width:36px;height:36px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;gap:0;
+  background:rgba(7,13,26,0.55);
+  border:1px solid var(--glass-border);
+  color:var(--text2);
+  cursor:pointer;
+  transition:border-color .25s ease,background .25s ease,color .25s ease,transform .25s ease,width .35s ease;
+  position:relative;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.14em;
+  text-transform:uppercase;
+  overflow:hidden;
+  white-space:nowrap;
+  padding:0;
+  flex-shrink:0;
+}
+.thesis-tile-share:hover{
+  border-color:var(--cyan);
+  background:rgba(0,212,200,0.08);
+  color:var(--cyan);
+}
+.thesis-tile-share:active{transform:scale(0.94)}
+.thesis-tile-share svg{width:16px;height:16px;display:block;flex-shrink:0}
+.thesis-tile-share-label{
+  width:0;opacity:0;
+  transition:width .35s ease,opacity .25s ease,margin .35s ease;
+  margin-left:0;
+}
+/* Expand into a pill that reveals 'Link copied' after a successful copy */
+.thesis-tile-share[data-state="copied"]{
+  width:auto;padding:0 14px 0 10px;
+  border-color:var(--green);
+  color:var(--green);
+  background:rgba(23,179,107,0.08);
+}
+.thesis-tile-share[data-state="copied"] .thesis-tile-share-label{
+  width:auto;opacity:1;margin-left:8px;
 }
 
 /* Reading view */
@@ -793,8 +839,25 @@ footer{border-top:1px solid var(--border);padding:56px 0 32px}
         <span class="thesis-tile-cta">Read the thesis <span class="arr">›</span></span>
       </div>
       <div class="thesis-tile-author">
-        <strong>Maneesh Menon</strong>
-        Author
+        <button type="button"
+                class="thesis-tile-share"
+                data-share-url="https://wiseworldai.com/#thesis/architecture-of-a-mind"
+                data-share-title="The Architecture of a Mind"
+                data-share-text="Why autonomous agents keep reinventing cognitive science."
+                aria-label="Share this essay">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span class="thesis-tile-share-label">Link copied</span>
+        </button>
+        <div class="thesis-tile-author-meta">
+          <strong>Maneesh Menon</strong>
+          Author
+        </div>
       </div>
     </a>
   </div>
@@ -5656,6 +5719,63 @@ function applyRoute(){
 }
 
 window.addEventListener("hashchange", applyRoute);
+
+/* ────────────────────────────────────────────────────────────
+   SHARE BUTTONS — Web Share API on mobile + recent desktop
+   browsers, clipboard fallback elsewhere. The share button
+   sits inside an <a class="thesis-tile-card">, so we MUST stop
+   propagation + prevent default; otherwise the card's hash
+   navigation fires before the share dialog opens.
+   ─────────────────────────────────────────────────────────── */
+document.addEventListener("click", async (ev) => {
+  const btn = ev.target.closest("[data-share-url]");
+  if(!btn) return;
+  ev.preventDefault();
+  ev.stopPropagation();
+
+  // Resolve URL — relative hash becomes the canonical absolute URL.
+  const rawUrl = btn.dataset.shareUrl || "";
+  const url = rawUrl.startsWith("http")
+    ? rawUrl
+    : (window.location.origin + window.location.pathname + rawUrl);
+  const title = btn.dataset.shareTitle || document.title;
+  const text  = btn.dataset.shareText  || "";
+
+  function flashCopied(){
+    btn.dataset.state = "copied";
+    const tip = btn.querySelector(".thesis-tile-share-tip");
+    const prev = tip ? tip.textContent : null;
+    if(tip) tip.textContent = "Link copied";
+    setTimeout(() => {
+      btn.removeAttribute("data-state");
+      if(tip && prev !== null) tip.textContent = prev;
+    }, 1800);
+  }
+
+  // Touch devices: Web Share API gives a native picker (iOS, Android).
+  // Desktop browsers: skip share (some hang or throw without warning) and
+  // copy to clipboard, which is the more reliable "I want the URL" UX.
+  const isTouch = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0);
+
+  if(isTouch && navigator.share){
+    try {
+      await navigator.share({ title, text, url });
+      return;
+    } catch(err){
+      // user cancelled the picker → silent. Other errors → fall through.
+      if(err && err.name === "AbortError") return;
+    }
+  }
+
+  try {
+    await navigator.clipboard.writeText(url);
+    flashCopied();
+  } catch(err){
+    // Last-resort fallback — open the page in a new tab so the user can
+    // copy the address bar manually.
+    window.open(url, "_blank", "noopener");
+  }
+});
 
 /* ────────────────────────────────────────────────────────────
    INITIAL RENDER
